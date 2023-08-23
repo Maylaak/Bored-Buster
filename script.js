@@ -23,12 +23,16 @@ document.addEventListener("DOMContentLoaded", function() {
         if (userMessage) {
             saveAndDisplayMessage(`You: ${userMessage}`);
             
-            // Fetch a response from the Bored API
-            const response = await fetch("https://www.boredapi.com/api/activity");
-            const responseData = await response.json();
-            const responseMessage = responseData.activity;
-
-            saveAndDisplayMessage(`Bored Bot: ${responseMessage}`);
+            // Check if the user's message includes the word "bored"
+            if (userMessage.toLowerCase().includes("bored")) {
+                // Fetch a response from the Bored API
+                const response = await fetch("https://www.boredapi.com/api/activity");
+                const responseData = await response.json();
+                const responseMessage = responseData.activity;
+                saveAndDisplayMessage(`Bored Bot: ${responseMessage}`);
+            } else {
+                saveAndDisplayMessage(`Bored Bot: Sorry, I don't recognize what you're saying.`);
+            }
 
             userMessageInput.value = "";
         }
